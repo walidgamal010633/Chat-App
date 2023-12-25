@@ -1,8 +1,14 @@
+import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/screen/home_page.dart';
 import 'package:chat_app/screen/widget/register_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const Chat_App());
 }
 
