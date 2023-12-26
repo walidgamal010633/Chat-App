@@ -24,7 +24,7 @@ class Chat_App extends StatelessWidget {
         regester_view.id:(context) => regester_view(),
         ChatPage.id :(context) => ChatPage(),
       },
-      home: ChatPage(),
+      home: home_page(),
     );
   }
 }
