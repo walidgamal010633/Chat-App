@@ -18,6 +18,7 @@ class Chat_App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         regester_view.id:(context) => regester_view(),
       },
