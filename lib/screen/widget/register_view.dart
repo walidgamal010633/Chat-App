@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/screen/widget/ChatPage.dart';
 import 'package:chat_app/custom%20widget/custom_bottom.dart';
 import 'package:chat_app/custom%20widget/custom_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -94,12 +95,12 @@ class _regester_viewState extends State<regester_view> {
                           
                           await registerUser();
                           scaffold_massage(context, "The account has been created successfully");
+                          
                         } on FirebaseAuthException catch (e) {
                           
                             scaffold_massage(context, "${e.code}");
                           
-                          // The email address is badly formatted.
-                          // email-already-in-use
+                          
                          
                         } catch (e) {
                           print(e);

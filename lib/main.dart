@@ -1,3 +1,4 @@
+import 'package:chat_app/screen/widget/ChatPage.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/screen/home_page.dart';
 import 'package:chat_app/screen/widget/register_view.dart';
@@ -21,8 +22,9 @@ class Chat_App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         regester_view.id:(context) => regester_view(),
+        ChatPage.id :(context) => ChatPage(),
       },
-      home: home_page(),
+      home: ChatPage(),
     );
   }
 }

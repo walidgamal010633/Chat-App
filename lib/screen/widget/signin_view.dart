@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/screen/widget/ChatPage.dart';
 import 'package:chat_app/custom%20widget/custom_textfield.dart';
 import 'package:chat_app/custom%20widget/custom_bottom.dart';
 import 'package:chat_app/screen/widget/register_view.dart';
@@ -6,14 +7,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class singin_view extends StatefulWidget {
-  const singin_view({super.key});
+class signin_view extends StatefulWidget {
+  const signin_view({super.key});
 
   @override
-  State<singin_view> createState() => _singin_viewState();
+  State<signin_view> createState() => _signin_viewState();
 }
 
-class _singin_viewState extends State<singin_view> {
+class _signin_viewState extends State<signin_view> {
   GlobalKey<FormState> formkey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String email, password;
@@ -93,6 +94,7 @@ class _singin_viewState extends State<singin_view> {
                             .signInWithEmailAndPassword(
                                 email: email, password: password);
                         scaffold_massage(context, "You are logged in to chat");
+                        Navigator.pushNamed(context, ChatPage.id);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == "invalid-credential") {
                           scaffold_massage(
