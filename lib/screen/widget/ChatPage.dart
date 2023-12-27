@@ -13,7 +13,13 @@ class ChatPage extends StatelessWidget {
   CollectionReference massages = FirebaseFirestore.instance.collection(kmassagescollactions);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return FutureBuilder<QuerySnapshot>(
+      future: massages.get(),
+      
+      builder: ( context,  snapshot) {
+        if(snapshot.hasData){
+          print(snapshot.data!.docs[0]["massage"]);
+        return  Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kprimarcolor,
@@ -47,7 +53,7 @@ class ChatPage extends StatelessWidget {
               controller:controller ,
               onSubmitted: (data) {
                 massages.add({
-                  "massagee" : data,
+                  "massage" : data,
                   "Time":DateTime.now()
                 });
                 controller.clear();
@@ -56,6 +62,11 @@ class ChatPage extends StatelessWidget {
           )
         ],
       ),
+    );
+        }else{
+          return CircleAvatar();
+        }
+      },
     );
   }
 }
