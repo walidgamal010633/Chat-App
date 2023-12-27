@@ -10,4 +10,5 @@ void scaffold_massage(BuildContext context,String massage) {
       ),
     );
   }
+  const kmassagescollactions= "massages";
 

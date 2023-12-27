@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/custom%20widget/chatbuble.dart';
 import 'package:chat_app/custom%20widget/custom_textform.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+   ChatPage({super.key});
+   TextEditingController controller =TextEditingController();
   static String id = "chat page";
+  CollectionReference massages = FirebaseFirestore.instance.collection(kmassagescollactions);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +43,16 @@ class ChatPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: custom_textform(),
+            child: custom_textform(
+              controller:controller ,
+              onSubmitted: (data) {
+                massages.add({
+                  "massagee" : data,
+                  "Time":DateTime.now()
+                });
+                controller.clear();
+              },
+            ),
           )
         ],
       ),
