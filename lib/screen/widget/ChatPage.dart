@@ -17,7 +17,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream:massages.snapshots(),
+      stream:massages.orderBy("Time").snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<massage_model> massageslist = [];
