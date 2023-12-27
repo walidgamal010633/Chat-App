@@ -9,15 +9,16 @@ import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
   ChatPage({super.key});
+  ScrollController _controller = ScrollController();
   TextEditingController controller = TextEditingController();
   static String id = "chat page";
   CollectionReference massages =
       FirebaseFirestore.instance.collection(kmassagescollactions);
-      
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream:massages.orderBy("Time").snapshots(),
+      stream: massages.orderBy("Time",descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<massage_model> massageslist = [];
@@ -50,9 +51,13 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    reverse: true,
+                    controller: _controller,
                     itemCount: massageslist.length,
                     itemBuilder: (context, index) {
-                      return chatbuble(massage: massageslist[index],);
+                      return chatbuble(
+                        massage: massageslist[index],
+                      );
                     },
                   ),
                 ),
@@ -63,6 +68,10 @@ class ChatPage extends StatelessWidget {
                     onSubmitted: (data) {
                       massages.add({"massage": data, "Time": DateTime.now()});
                       controller.clear();
+                      _controller.animateTo(
+                         0,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOutCubicEmphasized);
                     },
                   ),
                 )
