@@ -1,12 +1,14 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/model/massages_model.dart';
 import 'package:flutter/material.dart';
 
 
 
 class chatbuble extends StatelessWidget {
   const chatbuble({
-    super.key,
+    super.key, required this.massage,
   });
+  final massage_model massage ;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class chatbuble extends StatelessWidget {
       
         child: Padding(
           padding: const EdgeInsets.all(18),
-          child: Text("Hi iam a new user ",style: TextStyle(color: Colors.white,fontSize: 24),),
+          child: Text(massage.massage,style: TextStyle(color: Colors.white,fontSize: 24),),
         ),
       ),
     );
