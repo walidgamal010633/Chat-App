@@ -17,8 +17,9 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments ;
     return StreamBuilder<QuerySnapshot>(
-      stream: massages.orderBy("Time",descending: true).snapshots(),
+      stream: massages.orderBy("time",descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<massage_model> massageslist = [];
@@ -55,9 +56,9 @@ class ChatPage extends StatelessWidget {
                     controller: _controller,
                     itemCount: massageslist.length,
                     itemBuilder: (context, index) {
-                      return ChatBuble_forfrind(
+                      return massageslist[index].id ==email ? chatbuble(
                         massage: massageslist[index],
-                      );
+                      ): ChatBuble_forfrind(massage: massageslist[index] ,) ;
                     },
                   ),
                 ),
@@ -66,7 +67,7 @@ class ChatPage extends StatelessWidget {
                   child: custom_textform(
                     controller: controller,
                     onSubmitted: (data) {
-                      massages.add({"massage": data, "Time": DateTime.now()});
+                      massages.add({"massage": data, "time": DateTime.now(),"id":email});
                       controller.clear();
                       _controller.animateTo(
                          0,

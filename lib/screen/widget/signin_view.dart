@@ -21,6 +21,7 @@ class _signin_viewState extends State<signin_view> {
   bool isloding = false;
   @override
   Widget build(BuildContext context) {
+   
     return ModalProgressHUD(
       inAsyncCall: isloding,
       child: Form(
@@ -94,7 +95,7 @@ class _signin_viewState extends State<signin_view> {
                             .signInWithEmailAndPassword(
                                 email: email, password: password);
                         scaffold_massage(context, "You are logged in to chat");
-                        Navigator.pushNamed(context, ChatPage.id);
+                        Navigator.pushNamed(context, ChatPage.id,arguments: email);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == "invalid-credential") {
                           scaffold_massage(
