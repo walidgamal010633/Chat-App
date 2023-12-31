@@ -55,7 +55,7 @@ class ChatPage extends StatelessWidget {
                     controller: _controller,
                     itemCount: massageslist.length,
                     itemBuilder: (context, index) {
-                      return chatbuble(
+                      return ChatBuble_forfrind(
                         massage: massageslist[index],
                       );
                     },
